@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { CtaButton } from "@/components/ui/cta-button";
+import { cn } from "@/lib/utils";
 
 /** Photo collage with the cut-out portrait overlapping two framed panels (reference: Clube dos 5% hero). */
 function Collage() {
@@ -122,15 +123,19 @@ export function Hero() {
               className="rise mt-10 flex items-center gap-4 border-t border-line pt-7"
               style={{ "--d": "0.3s" } as React.CSSProperties}
             >
-              <div className="flex shrink-0 -space-x-2.5" aria-hidden>
-                {["fabian", "joel", "mike"].map((n) => (
+              <div className="flex shrink-0" aria-hidden>
+                {["fabian", "joel", "mike", "mago"].map((n, i) => (
                   <Image
                     key={n}
                     src={`/images/t-${n}.webp`}
                     alt=""
-                    width={40}
-                    height={40}
-                    className="size-10 rounded-md border-2 border-night object-cover"
+                    width={44}
+                    height={44}
+                    style={{ zIndex: 10 - i }}
+                    className={cn(
+                      "relative size-11 rounded-full object-cover ring-[3px] ring-night",
+                      i > 0 && "-ml-3.5",
+                    )}
                   />
                 ))}
               </div>

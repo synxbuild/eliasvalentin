@@ -14,7 +14,7 @@ export function Faq() {
             eyebrow="Antes de que preguntes"
             className="lg:sticky lg:top-28 lg:self-start"
           >
-            Preguntas <em className="font-normal italic text-gold-deep">frecuentes</em>
+            Preguntas <em className="metal-deep pr-1 font-normal italic">frecuentes</em>
           </SectionHeading>
 
           <div data-reveal className="border-t border-rule">

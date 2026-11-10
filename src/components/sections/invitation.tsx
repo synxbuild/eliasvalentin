@@ -19,7 +19,7 @@ export function Invitation() {
           <div data-reveal className="shell pb-16 pt-24 text-center sm:pt-28">
             <p className="tag-light">Tu invitación</p>
             <h2 id="invite-title" className="display mt-7 text-[2.5rem] sm:text-[3.4rem]">
-              Una noche. En vivo. <em className="font-normal italic text-gold-deep">Gratis.</em>
+              Una noche. En vivo. <em className="metal-deep pr-1 font-normal italic">Gratis.</em>
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-[#4f4941]">
               Se transmite en vivo una sola noche. Reserva tu lugar y te mandamos el enlace.

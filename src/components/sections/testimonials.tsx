@@ -12,7 +12,7 @@ export function Testimonials() {
             <div data-reveal className="max-w-2xl">
               <p className="tag-light">Personas que trabajaron con Elías</p>
               <h2 id="proof-title" className="display mt-7 text-[2.3rem] sm:text-[3rem] lg:text-[3.3rem]">
-                Trading, negocio y vida personal: <em className="font-normal italic text-gold-deep">los cambios</em> que
+                Trading, negocio y vida personal: <em className="metal-deep pr-1 font-normal italic">los cambios</em> que
                 comparten.
               </h2>
             </div>

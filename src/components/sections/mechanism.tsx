@@ -21,7 +21,7 @@ export function Mechanism() {
               className="max-w-3xl"
               lead="Cambiar lo de afuera funciona un rato. Lo que decide el resultado está un nivel más abajo."
             >
-              Tus resultados repiten <em className="font-normal italic text-gold-deep">la identidad</em> desde la que
+              Tus resultados repiten <em className="metal-deep pr-1 font-normal italic">la identidad</em> desde la que
               decides.
             </SectionHeading>
 

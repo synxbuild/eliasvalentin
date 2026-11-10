@@ -32,7 +32,7 @@ export function FinalCta() {
           </div>
           <p
             data-reveal
-            className="display mx-auto mt-8 max-w-3xl text-[2.1rem] italic leading-[1.04] sm:mt-10 sm:text-[3rem] lg:text-[3.4rem]"
+            className="display mx-auto mt-8 max-w-3xl text-[2.7rem] italic leading-[1.04] sm:mt-10 sm:text-[3rem] lg:text-[3.4rem]"
           >
             <span className="metal shine">Una mente diferente, crea una vida diferente.</span>
           </p>
@@ -45,7 +45,7 @@ export function FinalCta() {
             <p className="mt-5 text-[1.04rem] text-smoke">
               El ciclo no se rompe solo. Se rompe el día que decides mirarlo.
             </p>
-            <p className="mt-7 inline-block bg-umber px-5 py-3.5 text-[0.74rem] font-semibold uppercase tracking-[0.1em] text-sand">
+            <p className="mt-7 inline-block text-balance bg-umber px-5 py-3.5 text-[0.74rem] font-semibold uppercase tracking-[0.1em] text-sand">
               Domingo 15 de noviembre · Gratis · Nos vemos ahí
             </p>
             <div className="mt-9">

@@ -34,7 +34,7 @@ export function Fit() {
                   <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full border border-line-strong text-ash">
                     <X aria-hidden className="size-3" strokeWidth={2.5} />
                   </span>
-                  <span className="font-serif text-[1.18rem] font-light leading-snug text-ash sm:text-[1.3rem]">
+                  <span className="font-serif text-[1.18rem] font-light leading-snug text-paper sm:text-[1.3rem]">
                     {item}
                   </span>
                 </li>

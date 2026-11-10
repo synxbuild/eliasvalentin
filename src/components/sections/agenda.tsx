@@ -14,7 +14,7 @@ const PILL =
  */
 function ZoomLaptop() {
   return (
-    <div data-reveal className="relative mx-auto mt-16 max-w-[44rem]">
+    <div data-reveal className="relative mx-auto mt-9 max-w-[44rem] sm:mt-14">
       {/* Lid */}
       <div className="rounded-t-[1.2rem] border border-b-0 border-line-strong bg-gradient-to-b from-[#232120] to-[#141312] p-2 pb-2.5 shadow-[0_50px_100px_-30px_rgb(0_0_0/0.95)] sm:p-3 sm:pb-3.5">
         <div className="mx-auto mb-2 size-1.5 rounded-full bg-[#2e2c2a] ring-1 ring-black/60 sm:mb-2.5" aria-hidden />
@@ -93,7 +93,7 @@ export function Agenda() {
   return (
     <section id="agenda" aria-labelledby="agenda-title" className="relative bg-night">
       <div className="framed">
-        <div className="shell pb-20 pt-24 sm:pt-28">
+        <div className="shell pb-10 pt-20 sm:pb-20 sm:pt-28">
           <SectionHeading
             id="agenda-title"
             eyebrow="Domingo 15 de noviembre · 6:00 PM"

@@ -26,7 +26,7 @@ export function SectionHeading({ eyebrow, children, align = "center", tone = "da
       {lead && (
         <p
           className={cn(
-            "mt-5 text-[1.02rem] leading-relaxed",
+            "mt-5 text-balance text-[1.02rem] leading-relaxed",
             align === "center" && "mx-auto max-w-2xl",
             tone === "dark" ? "text-smoke" : "text-[#4f4941]",
           )}

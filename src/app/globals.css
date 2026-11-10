@@ -67,6 +67,13 @@ body {
 }
 
 @layer base {
+  /* No orphan words: short centred lines balance, paragraphs avoid a lone last word */
+  p,
+  li,
+  dd,
+  figcaption {
+    text-wrap: pretty;
+  }
   /* Tailwind 4 resets buttons to cursor: default; everything clickable gets the hand back. */
   button:not(:disabled),
   [role="button"],
@@ -602,6 +609,23 @@ dialog.reg-dialog[open] {
 }
 .js [data-reveal].is-in .strike {
   background-size: 100% 1.5px;
+}
+
+/* Problem list: the big number glides in after the card appears */
+.problem-num {
+  /* transform, not translate: Tailwind owns the translate property for centering */
+  transition-property: color, opacity, transform;
+}
+.js [data-reveal].problem-item .problem-num {
+  opacity: 0;
+  transform: translateX(-14px);
+  transition-duration: 0.5s, 1.1s, 1.1s;
+  transition-timing-function: ease, cubic-bezier(0.22, 1, 0.36, 1), cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: 0s, calc(var(--d, 0s) + 0.2s), calc(var(--d, 0s) + 0.2s);
+}
+.js [data-reveal].problem-item.is-in .problem-num {
+  opacity: 1;
+  transform: none;
 }
 
 details > summary {

@@ -111,7 +111,7 @@ export function Hero() {
               className="absolute right-[-6%] top-[12%] w-[62%] opacity-[0.08]"
             />
             {/* Starts just under the glass header, which blurs whatever scrolls beneath it */}
-            <div className="absolute inset-x-0 bottom-0 top-[4.25rem] sm:top-[5rem]">
+            <div className="absolute bottom-0 left-1/2 top-[4.5rem] w-[84%] -translate-x-1/2 sm:top-[5rem] sm:w-full">
               <Image
                 src="/images/elias-stage.webp"
                 alt="Elías Valentín en el escenario con micrófono"

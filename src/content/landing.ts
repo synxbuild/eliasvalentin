@@ -185,7 +185,7 @@ export const FAQ = [
   },
   {
     q: "¿A qué hora es en mi país?",
-    a: "A las 6:00 PM de Puerto Rico, que son las 5:00 PM de Nueva York y Miami. Debajo del formulario tienes la hora en cada país.",
+    a: "A las 6:00 PM de Puerto Rico, que son las 5:00 PM de Nueva York y Miami. Arriba de todo, junto a la fecha, tienes la hora de cada país.",
   },
   { q: "¿Cuánto dura?", a: "Unas dos horas, con espacio para preguntas al final." },
   {
@@ -198,38 +198,26 @@ export const FAQ = [
   },
 ] as const;
 
-export const COUNTRY_CODES = [
-  { label: "PR/US", code: "+1" },
-  { label: "MX", code: "+52" },
-  { label: "CO", code: "+57" },
-  { label: "RD", code: "+1" },
-  { label: "ES", code: "+34" },
-  { label: "CL", code: "+56" },
-  { label: "PE", code: "+51" },
-  { label: "AR", code: "+54" },
-  { label: "EC", code: "+593" },
-  { label: "VE", code: "+58" },
-  { label: "GT", code: "+502" },
-  { label: "SV", code: "+503" },
-  { label: "HN", code: "+504" },
-  { label: "NI", code: "+505" },
-  { label: "CR", code: "+506" },
-  { label: "PA", code: "+507" },
-  { label: "BO", code: "+591" },
-  { label: "PY", code: "+595" },
-  { label: "UY", code: "+598" },
-  { label: "Otro", code: "" },
-] as const;
-
-// Local start time per country, computed at runtime with Intl from EVENT.startsAt.
-export const TIMEZONES = [
-  { label: "Puerto Rico · Rep. Dominicana", tz: "America/Puerto_Rico" },
-  { label: "Nueva York · Miami", tz: "America/New_York" },
-  { label: "Colombia · Perú · Ecuador · Panamá", tz: "America/Bogota" },
-  { label: "México (CDMX)", tz: "America/Mexico_City" },
-  { label: "Guatemala · El Salvador · Honduras · Nicaragua · Costa Rica", tz: "America/Guatemala" },
-  { label: "Venezuela · Bolivia", tz: "America/Caracas" },
-  { label: "Argentina · Uruguay · Paraguay", tz: "America/Argentina/Buenos_Aires" },
-  { label: "Chile", tz: "America/Santiago" },
-  { label: "España", tz: "Europe/Madrid" },
+// Local start time per country (with its flag), computed at runtime with Intl from EVENT.startsAt.
+export const EVENT_COUNTRIES = [
+  { code: "PR", name: "Puerto Rico", tz: "America/Puerto_Rico" },
+  { code: "DO", name: "Rep. Dominicana", tz: "America/Santo_Domingo" },
+  { code: "US", name: "Nueva York · Miami", tz: "America/New_York" },
+  { code: "MX", name: "México (CDMX)", tz: "America/Mexico_City" },
+  { code: "CO", name: "Colombia", tz: "America/Bogota" },
+  { code: "PE", name: "Perú", tz: "America/Lima" },
+  { code: "EC", name: "Ecuador", tz: "America/Guayaquil" },
+  { code: "PA", name: "Panamá", tz: "America/Panama" },
+  { code: "GT", name: "Guatemala", tz: "America/Guatemala" },
+  { code: "SV", name: "El Salvador", tz: "America/El_Salvador" },
+  { code: "HN", name: "Honduras", tz: "America/Tegucigalpa" },
+  { code: "NI", name: "Nicaragua", tz: "America/Managua" },
+  { code: "CR", name: "Costa Rica", tz: "America/Costa_Rica" },
+  { code: "VE", name: "Venezuela", tz: "America/Caracas" },
+  { code: "BO", name: "Bolivia", tz: "America/La_Paz" },
+  { code: "AR", name: "Argentina", tz: "America/Argentina/Buenos_Aires" },
+  { code: "UY", name: "Uruguay", tz: "America/Montevideo" },
+  { code: "PY", name: "Paraguay", tz: "America/Asuncion" },
+  { code: "CL", name: "Chile", tz: "America/Santiago" },
+  { code: "ES", name: "España", tz: "Europe/Madrid" },
 ] as const;

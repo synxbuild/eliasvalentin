@@ -4,7 +4,7 @@ import type { Testimonial } from "@/content/landing";
 /** Dark card on the bone section (reference: Clube dos 5% "As transformações falam por si"). */
 export function TestimonialCard({ t }: { t: Testimonial }) {
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-[1.1rem] bg-night text-paper shadow-[0_30px_60px_-30px_rgb(0_0_0/0.6)]">
+    <article className="flex h-full flex-col overflow-hidden rounded-[1.1rem] bg-night text-paper shadow-[0_22px_36px_-22px_rgb(0_0_0/0.55)]">
       <div className="relative border-b border-line px-6 pb-6 pt-7">
         <div aria-hidden className="absolute inset-x-0 top-0 h-24 bg-[radial-gradient(60%_100%_at_20%_0%,rgb(200_162_96/0.18),transparent)]" />
         <p className="relative text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-ash">Su resultado compartido</p>
@@ -22,7 +22,9 @@ export function TestimonialCard({ t }: { t: Testimonial }) {
               <dd className="mt-1 text-smoke">{t.before}</dd>
             </div>
             <div>
-              <dt className="text-[0.6rem] font-semibold uppercase tracking-[0.22em] text-gold">Después</dt>
+              <dt className="text-[0.6rem] font-semibold uppercase tracking-[0.22em]">
+                <span className="metal">Después</span>
+              </dt>
               <dd className="mt-1 text-paper">{t.after}</dd>
             </div>
           </dl>

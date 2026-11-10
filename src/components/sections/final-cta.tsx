@@ -1,20 +1,40 @@
 import { BrandLockup } from "@/components/ui/brand-lockup";
 import { CtaButton } from "@/components/ui/cta-button";
+import LightRays from "@/components/ui/light-rays";
 
 export function FinalCta() {
   return (
     <section aria-labelledby="final-title" className="relative overflow-hidden bg-night">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-0 h-[34rem] w-[60rem] -translate-x-1/2 bg-[radial-gradient(closest-side,rgb(200_150_80/0.22),transparent)]"
-      />
+      {/* Warm gold light falling from the top (React Bits LightRays, WebGL; pauses off-screen) */}
+      <div aria-hidden className="absolute inset-0">
+        <LightRays
+          raysOrigin="top-center"
+          raysColor="#f1ddb0"
+          raysSpeed={0.8}
+          lightSpread={0.55}
+          rayLength={2.2}
+          glow={0.5}
+          haze={0.3}
+          atmosphere={0.15}
+          saturation={0.9}
+          intensity={0.85}
+          opacity={0.9}
+          followMouse
+          mouseInfluence={0.08}
+          cursorShadow={false}
+          clickPulse={false}
+        />
+      </div>
       <div className="framed">
         <div className="shell relative py-28 text-center sm:py-36">
           <div data-reveal>
             <BrandLockup size="lg" />
           </div>
-          <p data-reveal className="display mx-auto mt-12 max-w-3xl text-[2.2rem] italic sm:text-[3.4rem]">
-            <span className="metal">Una mente diferente, crea una vida diferente.</span>
+          <p
+            data-reveal
+            className="display mx-auto mt-8 max-w-3xl text-[2.1rem] italic leading-[1.04] sm:mt-10 sm:text-[3rem] lg:text-[3.4rem]"
+          >
+            <span className="metal shine">Una mente diferente, crea una vida diferente.</span>
           </p>
 
           <div data-reveal className="mx-auto mt-14 max-w-2xl">

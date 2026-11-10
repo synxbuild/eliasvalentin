@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { EVENT } from "@/content/landing";
+import { GlowButton } from "@/components/ui/glow-button";
 import { useOpenRegistration } from "@/components/ui/registration-modal";
 import { cn } from "@/lib/utils";
 
@@ -32,15 +33,10 @@ export function MobileCta() {
           <span className="block font-semibold uppercase tracking-[0.16em] text-sand">Gratis</span>
           {EVENT.dateLabel} · {EVENT.shortTime}
         </p>
-        <button
-          type="button"
-          onClick={open}
-          tabIndex={visible ? 0 : -1}
-          className="btn-pearl !min-h-11 shrink-0 !px-5 !text-[0.68rem] before:!size-12"
-        >
-          Reservar
+        <GlowButton type="button" size="sm" onClick={open} tabIndex={visible ? 0 : -1} className="shrink-0">
+          <span>Reservar</span>
           <ArrowUpRight aria-hidden className="size-4" />
-        </button>
+        </GlowButton>
       </div>
     </div>
   );

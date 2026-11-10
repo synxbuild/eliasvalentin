@@ -5,7 +5,6 @@ import { createContext, useCallback, useContext, useEffect, useRef } from "react
 import { X } from "lucide-react";
 import { EVENT } from "@/content/landing";
 import { RegistrationForm } from "./registration-form";
-import { TimezoneList } from "./timezone-list";
 
 const OpenContext = createContext<() => void>(() => {});
 
@@ -52,9 +51,6 @@ export function RegistrationProvider({ children }: { children: React.ReactNode }
 
           <div className="px-6 pb-6 pt-6 sm:px-8 sm:pb-8">
             <RegistrationForm />
-            <div className="mt-4">
-              <TimezoneList />
-            </div>
           </div>
 
           <form method="dialog" className="absolute right-3 top-3">

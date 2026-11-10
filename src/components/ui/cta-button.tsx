@@ -2,30 +2,25 @@
 
 import { ArrowUpRight } from "lucide-react";
 import { EVENT } from "@/content/landing";
-import { cn } from "@/lib/utils";
+import { GlowButton } from "./glow-button";
 import { useOpenRegistration } from "./registration-modal";
 
 type Props = {
   children?: React.ReactNode;
-  variant?: "pearl" | "line";
+  size?: "md" | "sm";
   className?: string;
 };
 
 /** Every CTA opens the same registration pop-up, with the same wording. */
-export function CtaButton({ children = EVENT.cta, variant = "pearl", className }: Props) {
+export function CtaButton({ children = EVENT.cta, size = "md", className }: Props) {
   const open = useOpenRegistration();
   return (
-    <button
-      type="button"
-      onClick={open}
-      aria-haspopup="dialog"
-      className={cn(variant === "pearl" ? "btn-pearl" : "btn-line", "group", className)}
-    >
+    <GlowButton type="button" size={size} onClick={open} aria-haspopup="dialog" className={className}>
       <span>{children}</span>
       <ArrowUpRight
         aria-hidden
         className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
       />
-    </button>
+    </GlowButton>
   );
 }

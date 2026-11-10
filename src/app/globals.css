@@ -67,6 +67,15 @@ body {
 }
 
 @layer base {
+  /* Tailwind 4 resets buttons to cursor: default; everything clickable gets the hand back. */
+  button:not(:disabled),
+  [role="button"],
+  summary,
+  select,
+  label[for],
+  input[type="checkbox"] {
+    cursor: pointer;
+  }
   :focus-visible {
     outline: 2px solid var(--color-gold-hi);
     outline-offset: 3px;
@@ -150,6 +159,32 @@ body {
   55%, 100% { background-position: 0% 50%; }
 }
 
+/*
+  Moving light for metal text. Used sparingly (the hero promise and the closing line):
+  if everything shines at once, nothing does.
+*/
+@utility shine {
+  background-size: 300% 100%;
+  background-position: 100% 50%;
+  animation: metal-sweep 6s cubic-bezier(0.45, 0, 0.25, 1) 1.2s infinite;
+}
+
+/* Gentle hover in place for floating labels */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+/* Webinar mockup: slow camera drift on the shared banner + a glare pass over the screen. */
+@keyframes screen-drift {
+  from { transform: translateX(9%) scale(1); }
+  to { transform: translateX(-9%) scale(1.04); }
+}
+@keyframes screen-glare {
+  0%, 62% { transform: translateX(-120%) skewX(-18deg); }
+  100% { transform: translateX(220%) skewX(-18deg); }
+}
+
 @utility metal {
   background-image: linear-gradient(
     105deg,
@@ -163,12 +198,9 @@ body {
     #d9b878 76%,
     #b8914f 100%
   );
-  background-size: 300% 100%;
-  background-position: 100% 50%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: metal-sweep 5.5s cubic-bezier(0.45, 0, 0.25, 1) infinite;
   /* room so accents (í, é) and descenders are not clipped by background-clip */
   padding-block: 0.12em;
   margin-block: -0.12em;
@@ -188,12 +220,9 @@ body {
     #8f6a2e 76%,
     #6e5022 100%
   );
-  background-size: 300% 100%;
-  background-position: 100% 50%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: metal-sweep 5.5s cubic-bezier(0.45, 0, 0.25, 1) infinite;
   padding-block: 0.12em;
   margin-block: -0.12em;
 }
@@ -211,65 +240,146 @@ body {
     #d6d5d0 76%,
     #a3a29d 100%
   );
-  background-size: 300% 100%;
-  background-position: 100% 50%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: metal-sweep 5.5s cubic-bezier(0.45, 0, 0.25, 1) 0.35s infinite;
   padding-block: 0.12em;
   margin-block: -0.12em;
 }
 
+/* Gold bar background with the same travelling light as the metallic text */
+@utility metal-bar {
+  background-image: linear-gradient(
+    105deg,
+    #86662f 0%,
+    #c8a260 22%,
+    #9a7638 34%,
+    #e0c287 42%,
+    #f8e7bf 48%,
+    #e0c287 54%,
+    #9a7638 62%,
+    #c8a260 76%,
+    #86662f 100%
+  );
+}
+
 /* ---------- Buttons ---------- */
 
-/* Pearl pill with a warm metallic flare on the right edge (reference: Clube dos 5% CTA) */
-@utility btn-pearl {
+/*
+  Glow button (adapted from the "brilho" button): pearl pill, an inner light that follows
+  the pointer (--glow-x, set in glow-button.tsx) and a warm halo on the pointer's side.
+*/
+.glow-frame {
+  --glow-w: 350px;
+  --glow-h: 150px;
   position: relative;
-  isolation: isolate;
-  display: inline-flex;
+  z-index: 1;
+  display: inline-block;
+  border-radius: 999px;
+  outline: 2px solid rgb(255 255 255 / 0.3);
+  vertical-align: middle;
+}
+.glow-frame::before,
+.glow-frame::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  top: 50%;
+  width: 108%;
+  height: 125%;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  filter: blur(15px);
+  will-change: filter;
+  transition: opacity 0.35s ease-out;
+}
+/* Right halo (visible at rest) */
+.glow-frame::before {
+  background: linear-gradient(to right, transparent 30%, rgb(241 221 176 / 0.75) 80%, rgb(214 170 98 / 0.85) 100%);
+  opacity: var(--halo-right, 1);
+}
+/* Left halo */
+.glow-frame::after {
+  background: linear-gradient(to left, transparent 30%, rgb(241 221 176 / 0.75) 80%, rgb(214 170 98 / 0.85) 95%);
+  opacity: var(--halo-left, 0);
+}
+.glow-clip {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 999px;
+}
+.glow-btn {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 3.75rem;
   align-items: center;
   justify-content: center;
   gap: 0.65rem;
-  min-height: 3.75rem;
   padding: 0 2.4rem;
   border-radius: 999px;
+  border: 1px solid #f8f7f4;
+  background: #e9e7e2;
+  color: #2b2825;
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #121110;
-  background: linear-gradient(180deg, #f3f1ed 0%, #d3d0c9 48%, #b7b3ab 100%);
-  box-shadow:
-    inset 0 1px 0 #fff,
-    inset 0 -3px 8px rgb(0 0 0 / 0.22),
-    0 0 0 1px rgb(255 255 255 / 0.25),
-    0 18px 40px -14px rgb(0 0 0 / 0.9);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  &::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    top: 50%;
-    right: -0.6rem;
-    width: 5.5rem;
-    height: 5.5rem;
-    transform: translateY(-50%);
-    border-radius: 999px;
-    background: radial-gradient(closest-side, rgb(255 231 180 / 0.95), rgb(226 150 70 / 0.55) 45%, transparent 75%);
-    filter: blur(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+.glow-btn > * {
+  position: relative;
+  z-index: 5;
+}
+.glow-btn::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: var(--glow-w);
+  height: var(--glow-h);
+  border-radius: 100%;
+  background: radial-gradient(
+    43.3% 44.23% at 50% 49.51%,
+    rgb(255 255 255 / 0.95) 0%,
+    #faf8f3 22%,
+    #ece8e0 45%,
+    #f0e2c4 62%,
+    rgb(241 221 176 / 0) 100%
+  );
+  filter: blur(5px);
+  transform: translate(var(--glow-x, -10%), -50%);
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glow-frame[data-hovering] .glow-btn::before {
+  transition: transform 0.15s ease-out;
+}
+.glow-btn:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+.glow-frame--sm {
+  --glow-w: 200px;
+  --glow-h: 90px;
+}
+.glow-frame--sm .glow-btn {
+  min-height: 2.75rem;
+  padding: 0 1.25rem;
+  font-size: 0.68rem;
+}
+@media (width < 30rem) {
+  .glow-frame:not(.glow-frame--sm) {
+    --glow-w: 240px;
+    --glow-h: 120px;
   }
-  &:hover {
-    transform: translateY(-2px);
-  }
-  &:hover::before {
-    transform: translateY(-50%) scale(1.15);
-  }
-  &:disabled {
-    opacity: 0.7;
-    cursor: progress;
+  .glow-frame:not(.glow-frame--sm) .glow-btn {
+    padding: 0 1.25rem;
   }
 }
 
@@ -329,6 +439,91 @@ body {
   &[aria-invalid="true"] {
     border-color: var(--color-danger);
   }
+}
+
+/* Phone field: react-phone-number-input inside a .field shell (pattern from the Logra landing) */
+.reg-phone {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 0 0 0.375rem;
+}
+.reg-phone:focus-within {
+  border-color: var(--color-gold);
+  background: rgb(255 255 255 / 0.06);
+  box-shadow: 0 0 0 4px rgb(200 162 96 / 0.16);
+}
+.reg-phone.is-invalid {
+  border-color: var(--color-danger);
+}
+.reg-phone .PhoneInputInput {
+  height: 100%;
+  min-width: 0;
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--color-paper);
+  font-size: 1rem;
+  outline: none;
+}
+.reg-phone .PhoneInputInput::placeholder {
+  color: rgb(154 149 141 / 0.8);
+}
+.reg-country {
+  position: relative;
+  flex-shrink: 0;
+  height: 2.4rem;
+}
+.reg-country__chip {
+  display: inline-flex;
+  height: 100%;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.65rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  background: rgb(255 255 255 / 0.05);
+  font-size: 0.94rem;
+  font-weight: 500;
+  transition: background-color 0.25s, border-color 0.25s;
+}
+.reg-country:hover .reg-country__chip,
+.reg-country:focus-within .reg-country__chip {
+  background: rgb(255 255 255 / 0.1);
+  border-color: rgb(200 162 96 / 0.55);
+}
+.reg-country__select {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  font-size: 1rem;
+}
+/* Native option list: solid colours and no inherited background images (the old chevron bug). */
+.reg-country__select option,
+select option {
+  background-color: var(--color-coal);
+  background-image: none;
+  color: var(--color-paper);
+}
+
+/* Small rectangular flag (in a layer so utilities can reshape it) */
+@layer components {
+.flag {
+  display: block;
+  width: 1.375rem;
+  height: 0.94rem;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 0.19rem;
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.15);
+}
+.flag svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 }
 
 /* Film grain */

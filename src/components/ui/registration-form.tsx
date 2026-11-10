@@ -2,23 +2,29 @@
 
 import { useId, useState } from "react";
 import { ArrowRight, CalendarPlus, CheckCircle2, Loader2, Lock, Mail, MessageCircle } from "lucide-react";
-import { COUNTRY_CODES, EVENT } from "@/content/landing";
+import PhoneInput, { isValidPhoneNumber, type Country } from "react-phone-number-input";
+import phoneLabelsEs from "react-phone-number-input/locale/es";
+import { EVENT } from "@/content/landing";
 import { useCountdown } from "@/hooks/use-countdown";
+import { GlowButton } from "./glow-button";
+import { PhoneCountrySelect } from "./phone-country-select";
 
-type Fields = { nombre: string; apellido: string; email: string; pais: string; telefono: string; consent: boolean };
+type Fields = { nombre: string; apellido: string; email: string; telefono: string; consent: boolean };
 type Errors = Partial<Record<keyof Fields, string>>;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-const SELECT_CHEVRON =
-  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23c8a260' stroke-width='1.6'/%3E%3C/svg%3E\")";
+// Audience: Puerto Rico first, then the rest of the Americas and Spain.
+const COUNTRY_ORDER: (Country | "|" | "...")[] = [
+  "PR", "US", "DO", "MX", "CO", "VE", "AR", "CL", "PE", "EC", "ES", "|", "...",
+];
 
 function validate(f: Fields): Errors {
   const e: Errors = {};
   if (f.nombre.trim().length < 2) e.nombre = "Escribe tu nombre.";
   if (f.apellido.trim().length < 2) e.apellido = "Escribe tu apellido.";
   if (!EMAIL_RE.test(f.email.trim())) e.email = "Revisa tu correo, parece incompleto.";
-  if (f.telefono.replace(/\D/g, "").length < 7) e.telefono = "Escribe tu número completo.";
+  if (!f.telefono || !isValidPhoneNumber(f.telefono)) e.telefono = "Revisa tu número, parece incompleto.";
   if (!f.consent) e.consent = "Necesitamos tu permiso para enviarte el enlace.";
   return e;
 }
@@ -43,10 +49,10 @@ export function RegistrationForm() {
     nombre: "",
     apellido: "",
     email: "",
-    pais: "+1",
     telefono: "",
     consent: false,
   });
+  const [country, setCountry] = useState<Country | undefined>("PR");
   const [errors, setErrors] = useState<Errors>({});
   const [touched, setTouched] = useState(false);
   const [state, setState] = useState<"idle" | "sending" | "done">("idle");
@@ -183,32 +189,20 @@ export function RegistrationForm() {
         <label htmlFor={`${uid}-telefono`} className={LABEL}>
           WhatsApp <span className="text-ash">· para el enlace y el recordatorio</span>
         </label>
-        <div className="flex gap-2">
-          <select
-            aria-label="Código de país"
-            className="field w-[7.75rem] shrink-0 appearance-none bg-[length:12px] bg-[right_0.8rem_center] bg-no-repeat !pr-8"
-            style={{ backgroundImage: SELECT_CHEVRON }}
-            value={fields.pais}
-            onChange={(e) => set("pais", e.target.value)}
-          >
-            {COUNTRY_CODES.map((c) => (
-              <option key={c.label} value={c.label} className="bg-coal">
-                {c.label} {c.code}
-              </option>
-            ))}
-          </select>
-          <input
-            {...a11y("telefono")}
-            className="field"
-            type="tel"
-            name="telefono"
-            inputMode="tel"
-            autoComplete="tel-national"
-            placeholder="Número"
-            value={fields.telefono}
-            onChange={(e) => set("telefono", e.target.value)}
-          />
-        </div>
+        <PhoneInput
+          {...a11y("telefono")}
+          className={errors.telefono ? "field reg-phone is-invalid" : "field reg-phone"}
+          name="telefono"
+          defaultCountry="PR"
+          international={false}
+          labels={phoneLabelsEs}
+          countrySelectComponent={PhoneCountrySelect}
+          countryOptionsOrder={COUNTRY_ORDER}
+          onCountryChange={setCountry}
+          placeholder={country === "PR" || country === "US" ? "(787) 000-0000" : "Número de WhatsApp"}
+          value={fields.telefono || undefined}
+          onChange={(v) => set("telefono", v ?? "")}
+        />
         {err("telefono")}
       </div>
 
@@ -237,19 +231,19 @@ export function RegistrationForm() {
         {err("consent")}
       </div>
 
-      <button type="submit" className="btn-pearl w-full" disabled={state === "sending"}>
+      <GlowButton type="submit" className="w-full" disabled={state === "sending"}>
         {state === "sending" ? (
           <>
             <Loader2 aria-hidden className="size-4 animate-spin" />
-            Reservando tu lugar…
+            <span>Reservando tu lugar…</span>
           </>
         ) : (
           <>
-            {EVENT.cta}
+            <span>{EVENT.cta}</span>
             <ArrowRight aria-hidden className="size-4" />
           </>
         )}
-      </button>
+      </GlowButton>
 
       <p className="flex items-start justify-center gap-2 text-center text-xs leading-relaxed text-ash">
         <Lock aria-hidden className="mt-0.5 size-3.5 shrink-0" />

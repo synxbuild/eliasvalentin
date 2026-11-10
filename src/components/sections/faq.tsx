@@ -1,5 +1,4 @@
-import { Plus } from "lucide-react";
-import { FAQ } from "@/content/landing";
+import { FaqList } from "@/components/ui/faq-list";
 import { SectionHeading } from "@/components/ui/section-heading";
 
 export function Faq() {
@@ -17,18 +16,8 @@ export function Faq() {
             Preguntas <em className="metal-deep pr-1 font-normal italic">frecuentes</em>
           </SectionHeading>
 
-          <div data-reveal className="border-t border-rule">
-            {FAQ.map((f, i) => (
-              <details key={f.q} className="group border-b border-rule" open={i === 0}>
-                <summary className="flex cursor-pointer items-center justify-between gap-6 py-6 font-serif text-[1.3rem] font-light transition-colors hover:text-gold-deep sm:text-[1.45rem]">
-                  {f.q}
-                  <span className="grid size-9 shrink-0 place-items-center rounded-full border border-rule">
-                    <Plus aria-hidden className="faq-icon size-4 transition-transform duration-300" />
-                  </span>
-                </summary>
-                <p className="max-w-2xl pb-7 pr-12 leading-relaxed text-[#4f4941]">{f.a}</p>
-              </details>
-            ))}
+          <div data-reveal>
+            <FaqList />
           </div>
         </div>
       </div>

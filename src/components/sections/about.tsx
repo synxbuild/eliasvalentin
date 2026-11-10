@@ -35,11 +35,11 @@ export function About() {
           <figure data-reveal style={{ "--d": "0.1s" } as React.CSSProperties} className="relative">
             <div className="relative aspect-[4/5] overflow-hidden rounded-[1.1rem] bg-graphite">
               <Image
-                src="/images/elias-stage-full.webp"
+                src="/images/elias-stage-water.webp"
                 alt="Elías Valentín en el escenario"
                 fill
                 sizes="(min-width: 1024px) 30rem, 92vw"
-                className="object-cover object-[50%_28%]"
+                className="object-cover object-[50%_22%] saturate-[0.85]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-night/70 via-transparent to-transparent" />
               <figcaption className="absolute bottom-5 left-5 rounded-full border border-line-strong bg-night/75 px-4 py-2 text-[0.66rem] font-semibold uppercase tracking-[0.16em] backdrop-blur">
@@ -51,7 +51,7 @@ export function About() {
 
         {/* Metallic rule + authority figures */}
         <div className="shell">
-          <div aria-hidden className="h-[3px] bg-gradient-to-r from-gold-deep via-gold-hi to-gold-deep" />
+          <div aria-hidden className="h-[3px] metal-bar" />
         </div>
         <dl className="shell grid sm:grid-cols-3">
           {AUTHORITY.map((s, i) => (

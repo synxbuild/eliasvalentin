@@ -65,7 +65,7 @@ export function Mechanism() {
         <div className="hatch absolute inset-x-0 top-0 h-full" aria-hidden />
         <div className="framed">
           <div className="relative mx-auto max-w-[36rem] px-5 sm:px-0">
-            <p className="-mt-px bg-gradient-to-r from-gold-deep via-gold to-gold-deep px-6 py-3.5 text-center text-[0.8rem] font-medium text-night">
+            <p className="-mt-px metal-bar px-6 py-3.5 text-center text-[0.8rem] font-medium text-night">
               Ese nivel es el que trabajamos <strong className="font-bold">el domingo 15 de noviembre.</strong>
             </p>
             <div data-reveal className="border-x border-b border-line bg-night px-7 pb-10 pt-10 text-center sm:px-10">

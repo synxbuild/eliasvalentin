@@ -4,8 +4,8 @@ import { Monogram } from "@/components/ui/monogram";
 
 export function SiteHeader() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-night/90 backdrop-blur-xl">
-      <div className="shell flex h-[4.5rem] items-center justify-between gap-4">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.08] bg-night/45 backdrop-blur-xl backdrop-saturate-150 lg:bg-night/75">
+      <div className="shell flex h-[3.75rem] items-center sm:h-[4.5rem] justify-between gap-4">
         <a href="#top" aria-label="Elías Valentín · inicio">
           <Monogram />
         </a>
@@ -14,7 +14,7 @@ export function SiteHeader() {
             <p className="text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-ash">Empieza en</p>
             <Countdown className="text-sm text-paper" />
           </div>
-          <CtaButton className="!min-h-11 !px-5 !text-[0.68rem] before:!size-12">Reservar gratis</CtaButton>
+          <CtaButton size="sm">Reservar gratis</CtaButton>
         </div>
       </div>
     </header>

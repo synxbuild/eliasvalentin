@@ -1,74 +1,71 @@
-import { CalendarDays, Clock3, Hourglass, Mic } from "lucide-react";
 import { EVENT } from "@/content/landing";
+import { BrandLockup } from "@/components/ui/brand-lockup";
 import { Countdown } from "@/components/ui/countdown";
 import { CtaButton } from "@/components/ui/cta-button";
-import { Monogram } from "@/components/ui/monogram";
-import { SealBadge } from "@/components/ui/seal-badge";
 
 const DETAILS = [
-  { icon: CalendarDays, k: "Día", v: EVENT.dateLabel },
-  { icon: Clock3, k: "Hora", v: EVENT.timeLabel },
-  { icon: Hourglass, k: "Duración", v: EVENT.duration },
-  { icon: Mic, k: "Con", v: EVENT.host },
+  { k: "Día", v: EVENT.dateLabel },
+  { k: "Hora", v: EVENT.timeLabel },
+  { k: "Duración", v: EVENT.duration },
+  { k: "Con", v: EVENT.host },
 ];
 
-/** The event as a premium ticket: details on the left, countdown + CTA on the stub. */
+/** Offer block: bone header with countdown, black card with hatch sides (reference: Clube dos 5% offer). */
 export function Invitation() {
   return (
-    <section aria-labelledby="invite-title" className="section-y relative overflow-hidden bg-coal">
-      <div aria-hidden className="hairline absolute inset-x-0 top-0" />
-      <div aria-hidden className="glow left-1/2 top-1/2 size-[40rem] -translate-x-1/2 -translate-y-1/2 opacity-40" />
-
-      <div className="container-lux relative">
-        <div data-reveal className="text-center">
-          <p className="eyebrow justify-center">Tu invitación</p>
-          <h2 id="invite-title" className="display mt-5 text-[2.6rem] sm:text-6xl">
-            Una noche. En vivo. <em className="text-gold-grad">Gratis.</em>
-          </h2>
+    <section aria-labelledby="invite-title" className="relative">
+      <div className="bg-bone text-[#16120e]">
+        <div className="framed [border-color:var(--color-rule)]">
+          <div data-reveal className="shell pb-16 pt-24 text-center sm:pt-28">
+            <p className="tag-light">Tu invitación</p>
+            <h2 id="invite-title" className="display mt-7 text-[2.5rem] sm:text-[3.4rem]">
+              Una noche. En vivo. <em className="font-normal italic text-gold-deep">Gratis.</em>
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-[#4f4941]">
+              Se transmite en vivo una sola noche. Reserva tu lugar y te mandamos el enlace.
+            </p>
+            <Countdown variant="boxes" tone="light" className="mt-10" />
+          </div>
         </div>
+      </div>
 
-        <div data-reveal className="relative mx-auto mt-14 max-w-5xl">
-          <SealBadge className="absolute -right-4 -top-12 z-10 hidden sm:block" />
+      <div className="relative bg-night">
+        <div className="hatch absolute inset-0" aria-hidden />
+        <div className="framed">
+          <div className="relative mx-auto max-w-[36rem] px-5 sm:px-0">
+            <p className="-mt-px bg-gradient-to-r from-gold-deep via-gold to-gold-deep px-6 py-3.5 text-center text-[0.8rem] font-medium text-night">
+              Para registrarte solo necesitas <strong className="font-bold">un minuto</strong>.
+            </p>
+            <div data-reveal className="border-x border-b border-line bg-night px-7 pb-9 pt-9 text-center sm:px-10">
+              <BrandLockup />
+              <div className="mx-auto my-7 h-px w-full bg-line-strong" />
+              <p className="bg-graphite px-4 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-sand">
+                Masterclass gratuita · {EVENT.platform}
+              </p>
+              <p className="display mt-7 text-[4.4rem] leading-none sm:text-[5.2rem]">
+                <span className="metal">Gratis</span>
+              </p>
+              <p className="mt-2 text-sm text-ash">Solo necesitas registrarte para recibir el enlace.</p>
 
-          <div className="card-lux grid overflow-hidden !rounded-[1.75rem] md:grid-cols-[1.35fr_1fr]">
-            {/* Ticket body */}
-            <div className="relative p-7 sm:p-10">
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <Monogram />
-                <span className="rounded-full border border-line-strong px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-gold-hi">
-                  {EVENT.platform}
-                </span>
-              </div>
-              <dl className="mt-10 grid gap-x-8 gap-y-7 sm:grid-cols-2">
-                {DETAILS.map(({ icon: Icon, k, v }) => (
-                  <div key={k} className="flex gap-3">
-                    <Icon aria-hidden className="mt-1 size-4 shrink-0 text-gold" />
-                    <div>
-                      <dt className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-muted">{k}</dt>
-                      <dd className="mt-1 font-serif text-xl text-cream">{v}</dd>
-                    </div>
+              <dl className="mt-8 grid grid-cols-2 border-y border-line text-left">
+                {DETAILS.map((d, i) => (
+                  <div
+                    key={d.k}
+                    className={`py-4 ${i % 2 === 0 ? "border-r border-line pr-4" : "pl-4"} ${i < 2 ? "border-b border-line" : ""}`}
+                  >
+                    <dt className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-ash">{d.k}</dt>
+                    <dd className="mt-1 text-[0.92rem] text-paper">{d.v}</dd>
                   </div>
                 ))}
               </dl>
-            </div>
 
-            {/* Perforation */}
-            <div aria-hidden className="relative md:hidden">
-              <div className="mx-7 border-t border-dashed border-line-strong" />
-              <span className="absolute -left-4 -top-4 size-8 rounded-full bg-coal" />
-              <span className="absolute -right-4 -top-4 size-8 rounded-full bg-coal" />
-            </div>
-
-            {/* Stub */}
-            <div className="relative flex flex-col items-center justify-center gap-6 bg-gradient-to-b from-gold/[0.07] to-transparent p-7 text-center sm:p-10 md:border-l md:border-dashed md:border-line-strong">
-              <span aria-hidden className="absolute -left-4 -top-4 hidden size-8 rounded-full bg-coal md:block" />
-              <span aria-hidden className="absolute -bottom-4 -left-4 hidden size-8 rounded-full bg-coal md:block" />
-              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-muted">Empieza en</p>
-              <Countdown variant="large" />
-              <CtaButton className="w-full" />
-              <p className="text-xs text-muted">Se transmite en vivo una sola noche.</p>
+              <CtaButton className="mt-9 w-full" />
+              <p className="mt-4 text-xs italic text-ash">Te llega el enlace por correo y WhatsApp, más un recordatorio.</p>
+              <div className="mx-auto mt-7 h-px w-full bg-line" />
+              <p className="mt-5 text-xs text-smoke">Sin costo · Tu número no se comparte · Una sola noche</p>
             </div>
           </div>
+          <div className="h-24" />
         </div>
       </div>
     </section>

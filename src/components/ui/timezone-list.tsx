@@ -25,7 +25,7 @@ export function TimezoneList() {
 
   return (
     <details className="rounded-xl border border-line bg-black/20 px-4 py-3 text-sm">
-      <summary className="flex cursor-pointer items-center justify-between gap-3 text-soft">
+      <summary className="flex cursor-pointer items-center justify-between gap-3 text-smoke">
         <span className="inline-flex items-center gap-2">
           <Globe aria-hidden className="size-4 text-gold" />
           La hora en tu país
@@ -33,15 +33,15 @@ export function TimezoneList() {
         <span className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Ver</span>
       </summary>
       {local && (
-        <p className="mt-3 rounded-lg bg-gold/10 px-3 py-2 text-cream">
+        <p className="mt-3 rounded-lg bg-gold/10 px-3 py-2 text-paper">
           En tu zona horaria: <strong className="font-semibold">{local}</strong>
         </p>
       )}
       <ul className="mt-3 divide-y divide-line">
         {TIMEZONES.map((t) => (
           <li key={t.tz} className="flex items-baseline justify-between gap-4 py-2">
-            <span className="text-muted">{t.label}</span>
-            <span className="shrink-0 tabular-nums text-cream" suppressHydrationWarning>
+            <span className="text-ash">{t.label}</span>
+            <span className="shrink-0 tabular-nums text-paper" suppressHydrationWarning>
               {formatIn(t.tz)}
             </span>
           </li>

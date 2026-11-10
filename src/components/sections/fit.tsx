@@ -5,41 +5,38 @@ import { SectionHeading } from "@/components/ui/section-heading";
 
 export function Fit() {
   return (
-    <section aria-labelledby="fit-title" className="section-y relative">
-      <div className="container-lux">
-        <SectionHeading id="fit-title" eyebrow="Antes de registrarte" align="center" className="max-w-3xl">
-          Esta masterclass <em className="text-gold-grad">es para ti</em> si…
-        </SectionHeading>
+    <section aria-labelledby="fit-title" className="relative bg-night">
+      <div className="framed border-t border-line">
+        <div className="shell pb-16 pt-24 sm:pt-28">
+          <SectionHeading id="fit-title" eyebrow="Antes de registrarte" className="max-w-3xl">
+            Esta masterclass <em className="metal font-normal">es para ti</em> si…
+          </SectionHeading>
+        </div>
 
-        <div className="mt-14 grid gap-4 lg:grid-cols-[1.4fr_1fr] lg:items-start">
-          <div data-reveal className="card-lux border-gold/40 p-7 sm:p-9">
-            <h3 className="flex items-center gap-3 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-gold">
-              <span className="grid size-7 place-items-center rounded-full bg-gold text-ink">
-                <Check aria-hidden className="size-4" strokeWidth={3} />
-              </span>
-              Es para ti si
-            </h3>
-            <ul className="mt-7 space-y-4">
+        <div className="grid border-y border-line lg:grid-cols-[1.35fr_1fr]">
+          <div data-reveal className="border-line px-6 py-10 sm:px-10 lg:border-r lg:px-16 lg:py-14">
+            <p className="flex items-center gap-3 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-gold">
+              <Check aria-hidden className="size-4" strokeWidth={2.5} /> Es para ti si
+            </p>
+            <ul className="mt-6 divide-y divide-line">
               {FOR_YOU.map((item) => (
-                <li key={item} className="flex gap-4 text-[1.02rem] leading-relaxed text-cream">
-                  <Check aria-hidden className="mt-1 size-4 shrink-0 text-gold" />
+                <li key={item} className="py-4 font-serif text-[1.2rem] font-light leading-snug text-paper sm:text-[1.3rem]">
                   {item}
                 </li>
               ))}
             </ul>
           </div>
-
-          <div data-reveal style={{ "--d": "0.1s" } as React.CSSProperties} className="card-lux bg-transparent p-7 sm:p-9">
-            <h3 className="flex items-center gap-3 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-muted">
-              <span className="grid size-7 place-items-center rounded-full border border-muted/40">
-                <X aria-hidden className="size-4" />
-              </span>
-              No es para ti si
-            </h3>
-            <ul className="mt-7 space-y-4">
+          <div
+            data-reveal
+            style={{ "--d": "0.1s" } as React.CSSProperties}
+            className="bg-coal px-6 py-10 max-lg:border-t max-lg:border-line sm:px-10 lg:px-12 lg:py-14"
+          >
+            <p className="flex items-center gap-3 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-ash">
+              <X aria-hidden className="size-4" /> No es para ti si
+            </p>
+            <ul className="mt-6 divide-y divide-line">
               {NOT_FOR_YOU.map((item) => (
-                <li key={item} className="flex gap-4 leading-relaxed text-muted">
-                  <X aria-hidden className="mt-1 size-4 shrink-0 text-muted/70" />
+                <li key={item} className="py-4 leading-relaxed text-ash">
                   {item}
                 </li>
               ))}
@@ -47,13 +44,15 @@ export function Fit() {
           </div>
         </div>
 
-        <div data-reveal className="mx-auto mt-16 max-w-3xl text-center">
-          <p className="display text-3xl sm:text-4xl">Si algo de la primera lista te habló directamente, presta atención.</p>
-          <p className="mt-5 text-lg text-soft">
-            Porque probablemente no necesitas otra respuesta que puedas consumir y olvidar mañana.{" "}
-            <strong className="font-semibold text-gold-hi">Necesitas comenzar un proceso de transformación.</strong>
+        <div data-reveal className="shell py-20 text-center sm:py-24">
+          <p className="display mx-auto max-w-3xl text-[1.9rem] sm:text-[2.4rem]">
+            Si algo de la primera lista te habló directamente, presta atención.
           </p>
-          <CtaButton className="mt-9" />
+          <p className="mx-auto mt-5 max-w-2xl text-smoke">
+            Porque probablemente no necesitas otra respuesta que puedas consumir y olvidar mañana.{" "}
+            <strong className="font-semibold text-paper">Necesitas comenzar un proceso de transformación.</strong>
+          </p>
+          <CtaButton className="mt-10 w-full sm:w-auto" />
         </div>
       </div>
     </section>

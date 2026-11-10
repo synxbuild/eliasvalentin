@@ -1,20 +1,31 @@
-import { ArrowRight } from "lucide-react";
+"use client";
+
+import { ArrowUpRight } from "lucide-react";
 import { EVENT } from "@/content/landing";
 import { cn } from "@/lib/utils";
+import { useOpenRegistration } from "./registration-modal";
 
 type Props = {
   children?: React.ReactNode;
-  href?: string;
-  variant?: "gold" | "ghost";
+  variant?: "pearl" | "line";
   className?: string;
 };
 
-/** Every CTA on the page points to the same registration form, with the same wording. */
-export function CtaButton({ children = EVENT.cta, href = EVENT.registerHref, variant = "gold", className }: Props) {
+/** Every CTA opens the same registration pop-up, with the same wording. */
+export function CtaButton({ children = EVENT.cta, variant = "pearl", className }: Props) {
+  const open = useOpenRegistration();
   return (
-    <a href={href} className={cn(variant === "gold" ? "btn-gold" : "btn-ghost", "group", className)}>
+    <button
+      type="button"
+      onClick={open}
+      aria-haspopup="dialog"
+      className={cn(variant === "pearl" ? "btn-pearl" : "btn-line", "group", className)}
+    >
       <span>{children}</span>
-      <ArrowRight aria-hidden className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-    </a>
+      <ArrowUpRight
+        aria-hidden
+        className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+      />
+    </button>
   );
 }

@@ -5,23 +5,23 @@ import { FinalCta } from "@/components/sections/final-cta";
 import { Fit } from "@/components/sections/fit";
 import { Hero } from "@/components/sections/hero";
 import { Invitation } from "@/components/sections/invitation";
-import { Marquee } from "@/components/sections/marquee";
 import { Mechanism } from "@/components/sections/mechanism";
 import { MobileCta } from "@/components/sections/mobile-cta";
 import { Problem } from "@/components/sections/problem";
+import { SealBand } from "@/components/sections/seal-band";
 import { SiteFooter } from "@/components/sections/site-footer";
 import { SiteHeader } from "@/components/sections/site-header";
 import { Testimonials } from "@/components/sections/testimonials";
 import { RevealObserver } from "@/components/ui/reveal-observer";
 
-// Section order mirrors the current live landing; only the design layer changes.
+// Same section order as the live landing. Registration lives in a pop-up opened by every CTA.
 export default function Home() {
   return (
     <>
       <SiteHeader />
       <main>
         <Hero />
-        <Marquee />
+        <SealBand />
         <Problem />
         <Mechanism />
         <About />

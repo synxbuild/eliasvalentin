@@ -6,59 +6,64 @@ import { cn } from "@/lib/utils";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
-type Props = { variant?: "compact" | "large"; className?: string };
+type Props = { variant?: "compact" | "boxes"; tone?: "dark" | "light"; className?: string };
 
-export function Countdown({ variant = "compact", className }: Props) {
+export function Countdown({ variant = "compact", tone = "dark", className }: Props) {
   const c = useCountdown(EVENT.startsAt, EVENT.endsAt);
   const units = [
-    { v: c.days, l: "días" },
-    { v: c.hours, l: "hrs" },
-    { v: c.minutes, l: "min" },
-    { v: c.seconds, l: "seg" },
+    { v: c.days, l: variant === "boxes" ? "Días" : "d" },
+    { v: c.hours, l: variant === "boxes" ? "Horas" : "h" },
+    { v: c.minutes, l: variant === "boxes" ? "Minutos" : "m" },
+    { v: c.seconds, l: variant === "boxes" ? "Segundos" : "s" },
   ];
 
   if (c.isLive || c.isOver) {
     return (
-      <p className={cn("text-sm font-semibold text-gold", className)}>
+      <p className={cn("text-sm font-semibold", className)}>
         {c.isLive ? "Estamos en vivo ahora" : "Esta masterclass ya pasó"}
       </p>
     );
   }
 
-  const large = variant === "large";
+  const label = c.ready ? `Empieza en ${c.days} días, ${c.hours} horas y ${c.minutes} minutos` : "Cuenta regresiva";
 
+  if (variant === "compact") {
+    return (
+      <p role="timer" aria-label={label} className={cn("font-medium tabular-nums tracking-wide", className)}>
+        {units.map((u, i) => (
+          <span key={u.l} aria-hidden>
+            {c.ready ? pad(u.v) : "--"}
+            <span className="text-ash">{u.l}</span>
+            {i < units.length - 1 && <span className="px-1 text-ash/50">:</span>}
+          </span>
+        ))}
+      </p>
+    );
+  }
+
+  // Boxed timer (reference: Clube dos 5% bonus countdown)
   return (
     <div
-      className={cn("flex items-stretch", large ? "gap-2 sm:gap-3" : "gap-1.5", className)}
       role="timer"
-      aria-label={c.ready ? `Empieza en ${c.days} días, ${c.hours} horas y ${c.minutes} minutos` : "Cuenta regresiva"}
+      aria-label={label}
+      className={cn(
+        "inline-flex gap-2 p-2",
+        tone === "dark" ? "bg-graphite" : "bg-[#c9c2b6]",
+        className,
+      )}
     >
       {units.map((u) => (
         <div
           key={u.l}
           className={cn(
-            "flex flex-col items-center justify-center tabular-nums",
-            large
-              ? "min-w-[4.25rem] rounded-xl border border-line bg-black/30 px-2 py-3 sm:min-w-[5rem]"
-              : "min-w-[2.4rem]",
+            "flex min-w-[4.4rem] flex-col items-center px-3 py-3 sm:min-w-[5.2rem]",
+            tone === "dark" ? "bg-night text-paper" : "bg-[#16120e] text-paper",
           )}
         >
-          <span
-            className={cn(
-              "font-serif leading-none text-cream",
-              large ? "text-3xl sm:text-4xl" : "text-lg",
-            )}
-            aria-hidden
-          >
+          <span className="text-3xl font-semibold tabular-nums tracking-tight sm:text-4xl" aria-hidden>
             {c.ready ? pad(u.v) : "--"}
           </span>
-          <span
-            className={cn(
-              "uppercase tracking-[0.18em] text-muted",
-              large ? "mt-2 text-[0.65rem]" : "mt-0.5 text-[0.55rem]",
-            )}
-            aria-hidden
-          >
+          <span className="mt-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-ash" aria-hidden>
             {u.l}
           </span>
         </div>

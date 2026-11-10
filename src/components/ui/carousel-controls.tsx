@@ -32,7 +32,7 @@ export function CarouselControls({ trackId }: { trackId: string }) {
   };
 
   const btn =
-    "grid size-12 place-items-center rounded-full border border-line-strong text-cream transition hover:border-gold hover:bg-gold/10 disabled:opacity-30 disabled:hover:bg-transparent";
+    "grid size-12 place-items-center rounded-full border border-line-strong text-paper transition hover:border-gold hover:bg-gold/10 disabled:opacity-30 disabled:hover:bg-transparent";
 
   return (
     <div className="flex gap-2">

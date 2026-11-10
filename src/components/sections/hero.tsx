@@ -1,93 +1,147 @@
 import Image from "next/image";
-import { CalendarDays, Clock3, Video } from "lucide-react";
 import { CtaButton } from "@/components/ui/cta-button";
-import { RegistrationCard } from "@/components/ui/registration-card";
-import { SealBadge } from "@/components/ui/seal-badge";
 
-const FACTS = [
-  { icon: CalendarDays, label: "Domingo 15 de noviembre" },
-  { icon: Clock3, label: "6:00 PM de Puerto Rico" },
-  { icon: Video, label: "En vivo por Zoom · 2 h aprox." },
-];
+/** Photo collage with the cut-out portrait overlapping two framed panels (reference: Clube dos 5% hero). */
+function Collage() {
+  return (
+    <div className="relative mx-auto aspect-[4/4.7] w-full max-w-[33rem] lg:max-w-none">
+      {/* Panel: real event */}
+      <figure className="rise absolute right-0 top-0 h-[46%] w-[66%] overflow-hidden rounded-[1.1rem] bg-graphite">
+        <Image
+          src="/images/lfde-event.webp"
+          alt="Reconocimiento en un evento de La Fórmula del Éxito"
+          fill
+          sizes="(min-width: 1024px) 22rem, 60vw"
+          className="scale-110 object-cover object-[78%_30%] opacity-55 blur-[1.5px] grayscale sepia-[45%]"
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(80%_80%_at_80%_20%,rgb(230_170_90/0.28),transparent_70%)]" />
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-night/30 to-night/80" />
+      </figure>
+
+      {/* Panel: stage */}
+      <figure
+        className="rise absolute bottom-0 left-0 h-[52%] w-full overflow-hidden rounded-[1.1rem] bg-graphite"
+        style={{ "--d": "0.08s" } as React.CSSProperties}
+      >
+        <Image
+          src="/images/elias-stage-full.webp"
+          alt=""
+          fill
+          sizes="(min-width: 1024px) 34rem, 92vw"
+          className="scale-125 object-cover object-[50%_12%] opacity-60 blur-[2px] grayscale sepia-[40%]"
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(70%_90%_at_70%_20%,rgb(230_170_90/0.32),transparent_70%)]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-night via-night/30 to-transparent" />
+        <Image
+          src="/brand/ev-monogram.png"
+          alt=""
+          width={489}
+          height={382}
+          className="absolute bottom-[10%] right-[6%] h-[48%] w-auto opacity-25 mix-blend-screen"
+        />
+      </figure>
+
+      {/* Portrait */}
+      <div className="absolute bottom-0 left-[-2%] h-[104%] w-[80%]">
+        <Image
+          src="/images/elias-stage.webp"
+          alt="Elías Valentín en el escenario con micrófono"
+          fill
+          preload
+          sizes="(min-width: 1024px) 28rem, 76vw"
+          className="rise object-contain object-bottom [mask-image:linear-gradient(to_bottom,black_82%,transparent)]"
+          style={{ "--d": "0.15s" } as React.CSSProperties}
+        />
+      </div>
+
+      {/* Floating labels (reference: Clube dos 5% laptop pills) */}
+      <span
+        className="rise absolute right-[4%] top-[50%] rounded-full border border-line-strong bg-night/80 px-5 py-3 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-paper shadow-[0_20px_40px_-15px_rgb(0_0_0/0.9)] backdrop-blur"
+        style={{ "--d": "0.5s" } as React.CSSProperties}
+      >
+        100% en vivo
+      </span>
+      <span
+        className="rise absolute bottom-[9%] right-[-2%] rounded-full border border-line-strong bg-night/80 px-5 py-3 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-paper shadow-[0_20px_40px_-15px_rgb(0_0_0/0.9)] backdrop-blur sm:right-[4%]"
+        style={{ "--d": "0.6s" } as React.CSSProperties}
+      >
+        Gratis por Zoom
+      </span>
+    </div>
+  );
+}
 
 export function Hero() {
   return (
-    <section id="top" aria-labelledby="hero-title" className="relative isolate overflow-hidden pt-24 sm:pt-28 xl:pt-32">
-      {/* Stage lighting */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="beam left-[2%] rotate-[22deg] opacity-70" />
-        <div className="beam left-[42%] -rotate-[8deg] xl:left-[46%]" />
-        <div className="beam right-[4%] -rotate-[24deg] opacity-50" />
-        <div className="glow left-1/2 top-[38%] size-[42rem] -translate-x-1/2 opacity-60" />
-        <p className="absolute inset-x-0 top-[18%] select-none text-center font-serif text-[22vw] italic leading-none text-transparent [-webkit-text-stroke:1px_rgb(217_177_107/0.08)] xl:text-[15rem]">
-          Masterclass
-        </p>
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-ink to-transparent" />
-      </div>
+    <section id="top" aria-labelledby="hero-title" className="relative overflow-hidden pt-[4.5rem]">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_60%_at_78%_40%,rgb(150_100_45/0.22),transparent_70%)]"
+      />
+      <div className="framed">
+        <div className="shell grid items-center gap-x-14 gap-y-14 py-14 sm:py-20 lg:grid-cols-[1fr_1.02fr] lg:py-24">
+          <div className="relative z-10">
+            <p className="rise flex items-center gap-3 text-[0.68rem] font-semibold uppercase tracking-[0.3em] text-ash">
+              <span className="size-1.5 animate-pulse-dot rounded-full bg-[#f07864]" />
+              Masterclass gratuita en vivo
+            </p>
 
-      <div className="container-lux grid gap-y-10 pb-16 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-center lg:gap-x-12 lg:pb-24 xl:grid-cols-[minmax(0,1fr)_minmax(0,19rem)_24rem] xl:gap-x-6">
-        {/* Copy */}
-        <div className="relative z-10">
-          <p className="rise inline-flex items-center gap-2.5 rounded-full border border-line bg-black/30 px-3.5 py-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-soft">
-            <span className="size-2 animate-pulse-dot rounded-full bg-[#f07864]" />
-            Masterclass gratuita en vivo
-          </p>
+            <h1
+              id="hero-title"
+              className="rise display mt-6 text-[2.55rem] sm:text-[3.4rem] lg:text-[3.6rem] xl:text-[3.9rem]"
+              style={{ "--d": "0.06s" } as React.CSSProperties}
+            >
+              Tus resultados no van a cambiar hasta que cambies{" "}
+              <em className="metal pr-1 font-normal">la versión de ti</em> que los está creando.
+            </h1>
 
-          <h1
-            id="hero-title"
-            className="rise display mt-6 text-[2.5rem] sm:text-[3.4rem] lg:text-[3.5rem] xl:text-[3.35rem]"
-            style={{ "--d": "0.08s" } as React.CSSProperties}
-          >
-            Tus resultados no van a cambiar hasta que cambies{" "}
-            <em className="text-gold-grad">la versión de ti</em> que los está creando.
-          </h1>
+            <p
+              className="rise mt-6 max-w-[33rem] text-[1.04rem] leading-relaxed text-smoke"
+              style={{ "--d": "0.12s" } as React.CSSProperties}
+            >
+              El domingo 15 de noviembre trabajamos{" "}
+              <strong className="font-semibold text-paper">por qué sigues en los mismos patrones</strong>, tomando las
+              mismas decisiones y obteniendo resultados que no reflejan lo que sabes que puedes.
+            </p>
 
-          <p
-            className="rise mt-6 max-w-[34rem] text-[1.05rem] leading-relaxed text-soft"
-            style={{ "--d": "0.16s" } as React.CSSProperties}
-          >
-            Una noche en vivo con <strong className="font-semibold text-cream">Elías Valentín</strong> para entender por
-            qué sigues en los mismos patrones, tomando las mismas decisiones y obteniendo resultados que no reflejan lo
-            que sabes que puedes.
-          </p>
+            <p
+              className="rise mt-8 inline-block bg-umber px-5 py-3.5 text-[0.74rem] font-semibold uppercase tracking-[0.1em] text-sand"
+              style={{ "--d": "0.18s" } as React.CSSProperties}
+            >
+              Domingo 15 de noviembre · 6:00 PM de Puerto Rico
+            </p>
 
-          <ul
-            className="rise mt-7 grid gap-2.5 sm:grid-cols-2 xl:grid-cols-1"
-            style={{ "--d": "0.24s" } as React.CSSProperties}
-          >
-            {FACTS.map(({ icon: Icon, label }) => (
-              <li key={label} className="flex items-center gap-3 text-sm text-cream">
-                <span className="grid size-8 shrink-0 place-items-center rounded-full border border-line bg-gold/5">
-                  <Icon aria-hidden className="size-4 text-gold" />
-                </span>
-                {label}
-              </li>
-            ))}
-          </ul>
+            <div className="rise mt-8" style={{ "--d": "0.24s" } as React.CSSProperties}>
+              <CtaButton className="w-full sm:w-auto" />
+              <p className="mt-4 text-[0.8rem] italic text-ash">
+                Sin costo. El enlace te llega por correo y por WhatsApp.
+              </p>
+            </div>
 
-          <div className="rise mt-8 lg:hidden" style={{ "--d": "0.32s" } as React.CSSProperties}>
-            <CtaButton className="w-full sm:w-auto" />
+            <div
+              className="rise mt-10 flex items-center gap-4 border-t border-line pt-7"
+              style={{ "--d": "0.3s" } as React.CSSProperties}
+            >
+              <div className="flex shrink-0 -space-x-2.5" aria-hidden>
+                {["fabian", "joel", "mike"].map((n) => (
+                  <Image
+                    key={n}
+                    src={`/images/t-${n}.webp`}
+                    alt=""
+                    width={40}
+                    height={40}
+                    className="size-10 rounded-md border-2 border-night object-cover"
+                  />
+                ))}
+              </div>
+              <p className="text-[0.82rem] leading-snug text-smoke">
+                <strong className="font-semibold text-paper">+4,000 personas</strong> en La Fórmula del Éxito,
+                <br className="hidden sm:block" /> Coca Cola Music Hall (2025).
+              </p>
+            </div>
           </div>
-        </div>
 
-        {/* Portrait on stage (mobile, tablet and wide desktop) */}
-        <div className="relative z-0 mx-auto -mb-28 h-[26rem] w-full max-w-[22rem] sm:h-[30rem] lg:hidden xl:-mx-14 xl:mb-0 xl:block xl:h-[40rem] xl:w-auto xl:max-w-none">
-          <div aria-hidden className="glow inset-x-0 bottom-10 mx-auto h-56 w-64 opacity-80" />
-          <Image
-            src="/images/elias-stage.webp"
-            alt="Elías Valentín en el escenario con micrófono"
-            fill
-            preload
-            sizes="(min-width: 1280px) 420px, (min-width: 640px) 360px, 90vw"
-            className="rise object-contain object-bottom [mask-image:linear-gradient(to_bottom,black_70%,transparent)]"
-            style={{ "--d": "0.12s" } as React.CSSProperties}
-          />
-          <SealBadge className="absolute right-0 top-6 xl:right-4 xl:top-14" />
-        </div>
-
-        {/* Registration */}
-        <div id="registro" className="rise relative z-10 scroll-mt-24" style={{ "--d": "0.28s" } as React.CSSProperties}>
-          <RegistrationCard />
+          <Collage />
         </div>
       </div>
     </section>

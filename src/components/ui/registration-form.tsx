@@ -11,7 +11,7 @@ type Errors = Partial<Record<keyof Fields, string>>;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 const SELECT_CHEVRON =
-  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23d9b16b' stroke-width='1.6'/%3E%3C/svg%3E\")";
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23c8a260' stroke-width='1.6'/%3E%3C/svg%3E\")";
 
 function validate(f: Fields): Errors {
   const e: Errors = {};
@@ -34,7 +34,7 @@ function buildCalendarHref() {
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
-const LABEL = "mb-1.5 block text-[0.78rem] font-medium text-soft";
+const LABEL = "mb-1.5 block text-[0.78rem] font-medium text-smoke";
 
 export function RegistrationForm() {
   const uid = useId();
@@ -78,7 +78,7 @@ export function RegistrationForm() {
     return (
       <div className="py-6 text-center">
         <h3 className="display text-3xl">Esta masterclass ya pasó</h3>
-        <p className="mt-3 text-soft">Si te registraste, revisa tu correo y tu WhatsApp: ahí te llega lo que sigue.</p>
+        <p className="mt-3 text-smoke">Si te registraste, revisa tu correo y tu WhatsApp: ahí te llega lo que sigue.</p>
       </div>
     );
   }
@@ -88,14 +88,13 @@ export function RegistrationForm() {
       <div className="py-2" role="status" aria-live="polite">
         <CheckCircle2 aria-hidden className="size-10 text-gold" />
         <h3 className="display mt-4 text-3xl">
-          Listo, {fields.nombre.trim().split(" ")[0]}.{" "}
-          <span className="italic text-gold-grad">Tu lugar está reservado.</span>
+          Listo, {fields.nombre.trim().split(" ")[0]}. <span className="metal">Tu lugar está reservado.</span>
         </h3>
-        <ul className="mt-6 space-y-3 text-sm text-soft">
+        <ul className="mt-6 space-y-3 text-sm text-smoke">
           <li className="flex gap-3">
             <Mail aria-hidden className="mt-0.5 size-4 shrink-0 text-gold" />
             <span>
-              Te llega el enlace de acceso a <strong className="break-all text-cream">{fields.email}</strong>.
+              Te llega el enlace de acceso a <strong className="break-all text-paper">{fields.email}</strong>.
             </span>
           </li>
           <li className="flex gap-3">
@@ -103,11 +102,11 @@ export function RegistrationForm() {
             Y por WhatsApp, con un recordatorio el mismo día.
           </li>
         </ul>
-        <a href={buildCalendarHref()} target="_blank" rel="noreferrer" className="btn-ghost mt-6 w-full">
+        <a href={buildCalendarHref()} target="_blank" rel="noreferrer" className="btn-line mt-6 w-full">
           <CalendarPlus aria-hidden className="size-4" />
           Agregar a mi calendario
         </a>
-        <p className="mt-5 rounded-lg border border-dashed border-line-strong px-3 py-2 text-center text-[0.7rem] uppercase tracking-[0.16em] text-muted">
+        <p className="mt-5 rounded-lg border border-dashed border-line-strong px-3 py-2 text-center text-[0.7rem] uppercase tracking-[0.16em] text-ash">
           Demo de diseño · no se envió ningún dato
         </p>
       </div>
@@ -182,7 +181,7 @@ export function RegistrationForm() {
 
       <div>
         <label htmlFor={`${uid}-telefono`} className={LABEL}>
-          WhatsApp <span className="text-muted">· para el enlace y el recordatorio</span>
+          WhatsApp <span className="text-ash">· para el enlace y el recordatorio</span>
         </label>
         <div className="flex gap-2">
           <select
@@ -222,11 +221,11 @@ export function RegistrationForm() {
       </div>
 
       <div>
-        <label className="flex cursor-pointer items-start gap-3 text-[0.8rem] leading-relaxed text-muted">
+        <label className="flex cursor-pointer items-start gap-3 text-[0.8rem] leading-relaxed text-ash">
           <input
             {...a11y("consent")}
             type="checkbox"
-            className="mt-0.5 size-[1.1rem] shrink-0 cursor-pointer accent-[#d9b16b]"
+            className="mt-0.5 size-[1.1rem] shrink-0 cursor-pointer accent-[#c8a260]"
             checked={fields.consent}
             onChange={(e) => set("consent", e.target.checked)}
           />
@@ -238,7 +237,7 @@ export function RegistrationForm() {
         {err("consent")}
       </div>
 
-      <button type="submit" className="btn-gold w-full text-base" disabled={state === "sending"}>
+      <button type="submit" className="btn-pearl w-full" disabled={state === "sending"}>
         {state === "sending" ? (
           <>
             <Loader2 aria-hidden className="size-4 animate-spin" />
@@ -252,7 +251,7 @@ export function RegistrationForm() {
         )}
       </button>
 
-      <p className="flex items-start justify-center gap-2 text-center text-xs leading-relaxed text-muted">
+      <p className="flex items-start justify-center gap-2 text-center text-xs leading-relaxed text-ash">
         <Lock aria-hidden className="mt-0.5 size-3.5 shrink-0" />
         <span>
           Te llega el enlace por correo y WhatsApp, más un recordatorio el mismo día. Sin costo. Tu número no se

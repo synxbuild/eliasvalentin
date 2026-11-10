@@ -1,16 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Bodoni_Moda, Hanken_Grotesk } from "next/font/google";
+import { Inter_Tight, Newsreader } from "next/font/google";
+import { RegistrationProvider } from "@/components/ui/registration-modal";
 import "./globals.css";
 
-const bodoni = Bodoni_Moda({
-  variable: "--font-bodoni",
+// Light editorial serif for headlines (closest free match to Tiempos Headline Light).
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
   subsets: ["latin"],
   style: ["normal", "italic"],
+  weight: ["300", "400", "500"],
   display: "swap",
 });
 
-const hanken = Hanken_Grotesk({
-  variable: "--font-hanken",
+const interTight = Inter_Tight({
+  variable: "--font-inter-tight",
   subsets: ["latin"],
   display: "swap",
 });
@@ -33,18 +36,20 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b0a08",
+  themeColor: "#050505",
   viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es" className={`${bodoni.variable} ${hanken.variable} antialiased`} suppressHydrationWarning>
+    <html lang="es" className={`${newsreader.variable} ${interTight.variable} antialiased`} suppressHydrationWarning>
       <head>
         {/* Enables scroll-reveal styles only when JS runs, so content is never hidden without it */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
-      <body className="min-h-dvh overflow-x-clip">{children}</body>
+      <body className="min-h-dvh overflow-x-clip">
+        <RegistrationProvider>{children}</RegistrationProvider>
+      </body>
     </html>
   );
 }

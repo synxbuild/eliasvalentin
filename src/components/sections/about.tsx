@@ -1,80 +1,79 @@
 import Image from "next/image";
 import { AUTHORITY } from "@/content/landing";
-import { SectionHeading } from "@/components/ui/section-heading";
 import { StatCounter } from "@/components/ui/stat-counter";
 
+/** Text left, photo right, metallic rule underneath (reference: Clube dos 5% "Pense comigo"). */
 export function About() {
   return (
-    <section aria-labelledby="about-title" className="section-y relative overflow-hidden">
-      <div className="container-lux grid items-center gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
-        {/* Portrait */}
-        <figure data-reveal className="relative mx-auto w-full max-w-md">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] border border-line bg-[radial-gradient(120%_80%_at_50%_100%,rgb(217_177_107/0.35),transparent_60%),linear-gradient(180deg,#17140f,#0b0a08)]">
-            <span
-              aria-hidden
-              className="absolute -right-6 -top-10 select-none font-serif text-[16rem] italic leading-none text-transparent [-webkit-text-stroke:1px_rgb(217_177_107/0.18)]"
-            >
-              EV
-            </span>
-            <div aria-hidden className="beam left-1/2 -translate-x-1/2 opacity-60" />
-            <Image
-              src="/images/elias-stage.webp"
-              alt="Elías Valentín"
-              fill
-              sizes="(min-width: 1024px) 28rem, 90vw"
-              className="object-cover object-top pt-8"
-            />
-            <div aria-hidden className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink via-ink/60 to-transparent" />
-            <figcaption className="absolute inset-x-6 bottom-6 flex items-end justify-between">
-              <span>
-                <span className="block font-serif text-2xl">Elías Valentín</span>
-                <span className="mt-1 block text-xs uppercase tracking-[0.2em] text-gold">Desde 2014 en escenarios</span>
-              </span>
-            </figcaption>
-          </div>
-        </figure>
-
-        {/* Story */}
-        <div>
-          <SectionHeading id="about-title" eyebrow="Quién te acompaña">
-            Una conversación que puede cambiar <em className="text-gold-grad">la forma en la que te ves.</em>
-          </SectionHeading>
-
-          <div data-reveal className="mt-8 space-y-5 text-[1.05rem] leading-relaxed text-soft">
-            <p>
-              <strong className="font-semibold text-cream">Soy Elías Valentín.</strong> Durante años he estudiado y
-              trabajado con personas que querían cambiar sus resultados, y lo que más he visto es que la mayoría quiere
-              cambiar lo que tiene sin primero cambiar quién está siendo.
-            </p>
-            <p>
-              Quieren más dinero, más libertad, más impacto y más crecimiento, pero intentan construirlo con los mismos
-              patrones que los llevaron hasta donde están.
-            </p>
-            <p className="border-l-2 border-gold pl-5 text-cream">
-              El 15 de noviembre te enseño el proceso que he usado durante años para ayudar a miles de personas a cambiar
-              su manera de pensar y empezar a producir resultados distintos.
-            </p>
+    <section aria-labelledby="about-title" className="relative bg-night">
+      <div className="framed border-t border-line">
+        <div className="shell grid items-center gap-12 py-24 sm:py-28 lg:grid-cols-[1fr_0.95fr] lg:gap-20">
+          <div>
+            <div data-reveal>
+              <p className="tag">Quién te acompaña</p>
+              <h2 id="about-title" className="display mt-7 text-[2.3rem] sm:text-[3rem] lg:text-[3.3rem]">
+                Una conversación que puede cambiar <em className="metal font-normal">la forma en la que te ves.</em>
+              </h2>
+            </div>
+            <div data-reveal className="mt-8 space-y-5 text-[1.02rem] leading-relaxed text-smoke">
+              <p>
+                <strong className="font-semibold text-paper">Soy Elías Valentín.</strong> Durante años he estudiado y
+                trabajado con personas que querían cambiar sus resultados, y lo que más he visto es que la mayoría quiere
+                cambiar lo que tiene sin primero cambiar quién está siendo.
+              </p>
+              <p>
+                Quieren más dinero, más libertad, más impacto y más crecimiento, pero intentan construirlo con los mismos
+                patrones que los llevaron hasta donde están.
+              </p>
+              <p className="text-paper">
+                El 15 de noviembre te enseño <strong className="font-semibold">el proceso que he usado durante años</strong>{" "}
+                para ayudar a miles de personas a cambiar su manera de pensar y empezar a producir resultados distintos.
+              </p>
+            </div>
           </div>
 
-          <dl className="mt-10 grid gap-3 sm:grid-cols-3">
-            {AUTHORITY.map((s, i) => (
-              <div
-                key={s.label}
-                data-reveal
-                style={{ "--d": `${i * 0.1}s` } as React.CSSProperties}
-                className="card-lux flex flex-col p-5"
-              >
-                <dt className="order-2 mt-3 text-sm leading-snug text-cream">
-                  {s.label}
-                  <span className="mt-1 block text-xs text-muted">{s.detail}</span>
-                </dt>
-                <dd className="order-1 font-serif text-[2.6rem] leading-none text-gold-grad">
-                  <StatCounter value={s.value} suffix={s.suffix} />
-                </dd>
-              </div>
-            ))}
-          </dl>
+          <figure data-reveal style={{ "--d": "0.1s" } as React.CSSProperties} className="relative">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.1rem] bg-graphite">
+              <Image
+                src="/images/elias-stage-full.webp"
+                alt="Elías Valentín en el escenario"
+                fill
+                sizes="(min-width: 1024px) 30rem, 92vw"
+                className="object-cover object-[50%_28%]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-night/70 via-transparent to-transparent" />
+              <figcaption className="absolute bottom-5 left-5 rounded-full border border-line-strong bg-night/75 px-4 py-2 text-[0.66rem] font-semibold uppercase tracking-[0.16em] backdrop-blur">
+                Desde su primera conferencia en 2014
+              </figcaption>
+            </div>
+          </figure>
         </div>
+
+        {/* Metallic rule + authority figures */}
+        <div className="shell">
+          <div aria-hidden className="h-[3px] bg-gradient-to-r from-gold-deep via-gold-hi to-gold-deep" />
+        </div>
+        <dl className="shell grid sm:grid-cols-3">
+          {AUTHORITY.map((s, i) => (
+            <div
+              key={s.label}
+              data-reveal
+              style={{ "--d": `${i * 0.1}s` } as React.CSSProperties}
+              className="flex flex-col border-line py-9 max-sm:border-b sm:px-8 sm:first:pl-0 sm:[&:not(:last-child)]:border-r"
+            >
+              <dt className="order-2 mt-3 text-sm leading-snug text-paper">
+                {s.label}
+                <span className="mt-1 block text-xs text-ash">{s.detail}</span>
+              </dt>
+              <dd className="display order-1 text-[3.2rem] leading-none">
+                <span className="metal">
+                  <StatCounter value={s.value} suffix={s.suffix} />
+                </span>
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <div className="h-16" />
       </div>
     </section>
   );

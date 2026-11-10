@@ -9,7 +9,7 @@ import { useCountdown } from "@/hooks/use-countdown";
 import { GlowButton } from "./glow-button";
 import { PhoneCountrySelect } from "./phone-country-select";
 
-type Fields = { nombre: string; apellido: string; email: string; telefono: string; consent: boolean };
+type Fields = { nombre: string; email: string; telefono: string; consent: boolean };
 type Errors = Partial<Record<keyof Fields, string>>;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -21,8 +21,7 @@ const COUNTRY_ORDER: (Country | "|" | "...")[] = [
 
 function validate(f: Fields): Errors {
   const e: Errors = {};
-  if (f.nombre.trim().length < 2) e.nombre = "Escribe tu nombre.";
-  if (f.apellido.trim().length < 2) e.apellido = "Escribe tu apellido.";
+  if (f.nombre.trim().length < 3) e.nombre = "Escribe tu nombre completo.";
   if (!EMAIL_RE.test(f.email.trim())) e.email = "Revisa tu correo, parece incompleto.";
   if (!f.telefono || !isValidPhoneNumber(f.telefono)) e.telefono = "Revisa tu número, parece incompleto.";
   if (!f.consent) e.consent = "Necesitamos tu permiso para enviarte el enlace.";
@@ -47,7 +46,6 @@ export function RegistrationForm() {
   const status = useCountdown(EVENT.startsAt, EVENT.endsAt);
   const [fields, setFields] = useState<Fields>({
     nombre: "",
-    apellido: "",
     email: "",
     telefono: "",
     consent: false,
@@ -134,37 +132,20 @@ export function RegistrationForm() {
 
   return (
     <form noValidate onSubmit={onSubmit} className="relative space-y-4">
-      <div className="grid grid-cols-2 gap-3">
-        <div>
-          <label htmlFor={`${uid}-nombre`} className={LABEL}>
-            Nombre
-          </label>
-          <input
-            {...a11y("nombre")}
-            className="field"
-            name="nombre"
-            autoComplete="given-name"
-            placeholder="Tu nombre"
-            value={fields.nombre}
-            onChange={(e) => set("nombre", e.target.value)}
-          />
-          {err("nombre")}
-        </div>
-        <div>
-          <label htmlFor={`${uid}-apellido`} className={LABEL}>
-            Apellido
-          </label>
-          <input
-            {...a11y("apellido")}
-            className="field"
-            name="apellido"
-            autoComplete="family-name"
-            placeholder="Tu apellido"
-            value={fields.apellido}
-            onChange={(e) => set("apellido", e.target.value)}
-          />
-          {err("apellido")}
-        </div>
+      <div>
+        <label htmlFor={`${uid}-nombre`} className={LABEL}>
+          Nombre completo
+        </label>
+        <input
+          {...a11y("nombre")}
+          className="field"
+          name="nombre"
+          autoComplete="name"
+          placeholder="Tu nombre y apellido"
+          value={fields.nombre}
+          onChange={(e) => set("nombre", e.target.value)}
+        />
+        {err("nombre")}
       </div>
 
       <div>

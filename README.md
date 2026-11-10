@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Elías Valentín · Masterclass landing (redesign concept)
 
-## Getting Started
+Design concept by SYNX BUILD for the free masterclass landing
+(current live page: https://clase.eliasvalentin.com/p/masterclass).
 
-First, run the development server:
+Same section structure and verified content as the live page; new art direction, UX and front-end.
+
+## Stack
+
+Next.js 16 (App Router, static) · React 19 · TypeScript · Tailwind CSS 4 · lucide-react
+
+## Run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where things live
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `src/content/landing.ts` — all copy, event data, testimonials and FAQ (single source of truth)
+- `src/components/sections/` — one file per page section, in page order (see `src/app/page.tsx`)
+- `src/components/ui/` — shared pieces: registration form, countdown, CTA, seal, carousel controls
+- `src/app/globals.css` — design tokens (`@theme`) and utilities (buttons, cards, fields, reveal)
+- `design/source-assets/` — original files downloaded from the live page (not served)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Before going live
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **The registration form is a demo.** It validates and shows a success state but sends nothing.
+  Connect `onSubmit` in `src/components/ui/registration-form.tsx` to the real CRM/webhook.
+- Point the "Política de privacidad" link in `site-footer.tsx` to the real URL.
+- The "EV" mark is typographic; swap in the official logo file when available.
+- The original OG image says 8:00 PM PR while the page says 6:00 PM PR — confirm the real time.
